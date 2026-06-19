@@ -394,7 +394,10 @@ footer{text-align:center;padding:3rem 1.5rem;font-size:.78rem;color:var(--subtle
         <ul class="tl-list">
           <li>Framework development: design and maintenance of in-house Robot Framework automation for multi-country e-commerce web shop.</li>
           <li>E2E &amp; UI automation with Playwright across DE, NL, AT, PL and Ansons tenants.</li>
-          <li>SAP business process automation — GRC compliance risk checks across PS1, PC1, QV1.</li>
+          <li>SAP GUI &amp; Fiori automation — GRC compliance risk checks across PS1, PC1, QV1; IKS user-profile audits detecting unauthorised SAP_ALL / SAP_NEW role assignments.</li>
+          <li>Built <code style="font-family:'SF Mono',Consolas,monospace;font-size:.85em">CreateXmlFileWaren.py</code> — custom Python library that reads Excel test data and generates SAP-structured Warenverkehr logistics XML for end-to-end goods-movement automation on QV1.</li>
+          <li>Developed <code style="font-family:'SF Mono',Consolas,monospace;font-size:.85em">CommonListener.py</code> — Robot Framework listener routing test results and suite summaries to per-team MS Teams channels via Adaptive Cards; webhook credentials retrieved from KeePass at runtime.</li>
+          <li>SAP KPI monitoring via Datadog: custom listener records SAP login duration per system, ships metrics to Datadog for SLA tracking.</li>
           <li>API testing (REST + gRPC), Kafka event validation, PostgreSQL &amp; BigQuery data checks.</li>
           <li>Mobile testing on iOS (XCUITest) and Android (UiAutomator2) with Appium.</li>
           <li>Owns 28+ Jenkins pipelines; GitHub Actions for linting (Robocop, Ruff) &amp; SonarQube gates.</li>
@@ -485,6 +488,20 @@ footer{text-align:center;padding:3rem 1.5rem;font-size:.78rem;color:var(--subtle
       <h3>GRC Compliance Automation</h3>
       <p>Unattended SAP access-control risk checks across PS1, PC1, QV1 — flags unauthorized role assignments before audit findings.</p>
       <div class="tag-row"><span class="tag">SAP GUI</span><span class="tag">Python</span><span class="tag">Jenkins</span></div>
+    </div>
+
+    <div class="project-card reveal reveal-delay-2" data-cat="sap">
+      <span class="project-pill pill-green">SAP / GRC</span>
+      <h3>Warenverkehr Logistics Pipeline</h3>
+      <p>Custom Python library that reads Excel test data and generates SAP-structured XML for the goods-movement flow — fully automated end-to-end logistics processing on the QV1 system.</p>
+      <div class="tag-row"><span class="tag">SAP GUI</span><span class="tag">Python</span><span class="tag">XML</span><span class="tag">Robot Framework</span></div>
+    </div>
+
+    <div class="project-card reveal" data-cat="sap">
+      <span class="project-pill pill-green">SAP / GRC</span>
+      <h3>IKS User Profile Audit</h3>
+      <p>Automated SAP profile checks that flag unauthorised SAP_ALL / SAP_NEW assignments by cross-referencing live SAP data against maintained whitelist datasets — results pushed to the security team before each audit cycle.</p>
+      <div class="tag-row"><span class="tag">SAP GUI Scripting</span><span class="tag">KeePass</span><span class="tag">Excel Whitelist</span><span class="tag">Jenkins</span></div>
     </div>
 
     <div class="project-card reveal reveal-delay-2" data-cat="api">
