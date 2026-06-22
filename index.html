@@ -153,7 +153,7 @@ section{padding:5rem 1.5rem;max-width:1000px;margin:0 auto}
 .tl-expand-btn svg{transition:transform .3s}
 .tl-item.open .tl-expand-btn svg{transform:rotate(180deg)}
 .tl-body{max-height:0;overflow:hidden;transition:max-height .4s ease}
-.tl-item.open .tl-body{max-height:500px}
+.tl-item.open .tl-body{max-height:820px}
 .tl-list{list-style:none;padding-top:.4rem}
 .tl-list li{font-size:.85rem;color:var(--muted);padding:.28rem 0 .28rem 1.1rem;position:relative;line-height:1.55}
 .tl-list li::before{content:'—';position:absolute;left:0;color:var(--subtle);font-size:.7rem;top:.38rem}
@@ -187,6 +187,8 @@ section{padding:5rem 1.5rem;max-width:1000px;margin:0 auto}
 .pill-blue   { background:rgba(59,130,246,.1);  color:var(--pill-blue-fg);       border:1px solid rgba(59,130,246,.25) }
 .pill-cyan   { background:rgba(0,229,255,.1);   color:var(--accent);             border:1px solid rgba(0,229,255,.2) }
 .pill-green  { background:rgba(16,185,129,.1);  color:var(--accent3);            border:1px solid rgba(16,185,129,.2) }
+.pill-orange { background:rgba(249,115,22,.1);  color:#fb923c;                   border:1px solid rgba(249,115,22,.25) }
+[data-theme="light"] .pill-orange { color:#c2410c }
 
 /* ── SKILLS MANIFEST ── */
 .manifest-wrap{background:var(--card);border:1px solid var(--border);border-radius:20px;overflow:hidden}
@@ -402,8 +404,13 @@ footer{text-align:center;padding:3rem 1.5rem;font-size:.78rem;color:var(--subtle
           <li>Mobile testing on iOS (XCUITest) and Android (UiAutomator2) with Appium.</li>
           <li>Owns 28+ Jenkins pipelines; GitHub Actions for linting (Robocop, Ruff) &amp; SonarQube gates.</li>
           <li>Jira/XRay result sync; MS Teams notifications via custom Adaptive Card listener.</li>
+          <li>Integrated Robot Framework E2E tests as a quality gate into the Release Train GitHub Actions workflow — runs across buyfulfill, mac, and welcome teams before every staging/production promotion on GKE.</li>
+          <li>Built Python XML-parser that classifies <code style="font-family:'SF Mono',Consolas,monospace;font-size:.8em">output.xml</code> failures as blocking or <code style="font-family:'SF Mono',Consolas,monospace;font-size:.8em">notBlock</code> (informational) — prevents false negatives from halting deployments unnecessarily.</li>
+          <li>Configured GCP Workload Identity Federation: keyless CI authentication via GitHub OIDC tokens eliminates long-lived service account keys from the pipeline.</li>
+          <li>Parallel matrix test execution across teams with a finalise job that merges results and posts a unified PR comment with per-team GCS log links.</li>
+          <li>MS Teams Adaptive Card notifications for Release Train runs — auto-post pass/fail summaries with Google Cloud result URLs to team channels on each promotion.</li>
         </ul>
-        <div class="tag-row"><span class="tag">Robot Framework</span><span class="tag">Python</span><span class="tag">Playwright</span><span class="tag">Appium</span><span class="tag">Kafka</span><span class="tag">BigQuery</span><span class="tag">Jenkins</span><span class="tag">SAP GUI</span><span class="tag">GRC</span></div>
+        <div class="tag-row"><span class="tag">Robot Framework</span><span class="tag">Python</span><span class="tag">Playwright</span><span class="tag">Appium</span><span class="tag">Kafka</span><span class="tag">BigQuery</span><span class="tag">Jenkins</span><span class="tag">SAP GUI</span><span class="tag">GRC</span><span class="tag">GitHub Actions</span><span class="tag">GKE</span><span class="tag">ArgoCD</span><span class="tag">Workload Identity</span></div>
       </div>
     </div>
 
@@ -472,6 +479,7 @@ footer{text-align:center;padding:3rem 1.5rem;font-size:.78rem;color:var(--subtle
     <button class="filter-btn" data-filter="api">API / gRPC</button>
     <button class="filter-btn" data-filter="mobile">Mobile</button>
     <button class="filter-btn" data-filter="sap">SAP / GRC</button>
+    <button class="filter-btn" data-filter="cicd">CI/CD</button>
     <button class="filter-btn" data-filter="data">Data / Events</button>
   </div>
   <div class="projects-grid">
@@ -502,6 +510,20 @@ footer{text-align:center;padding:3rem 1.5rem;font-size:.78rem;color:var(--subtle
       <h3>IKS User Profile Audit</h3>
       <p>Automated SAP profile checks that flag unauthorised SAP_ALL / SAP_NEW assignments by cross-referencing live SAP data against maintained whitelist datasets — results pushed to the security team before each audit cycle.</p>
       <div class="tag-row"><span class="tag">SAP GUI Scripting</span><span class="tag">KeePass</span><span class="tag">Excel Whitelist</span><span class="tag">Jenkins</span></div>
+    </div>
+
+    <div class="project-card reveal reveal-delay-1" data-cat="cicd">
+      <span class="project-pill pill-orange">CI/CD · QA Gate</span>
+      <h3>Release Train Quality Gate</h3>
+      <p>GitHub Actions workflow that runs Robot Framework E2E tests across three teams in a parallel matrix before every GKE staging/production promotion — ArgoCD + Kustomize GitOps pipeline, keyless GCP auth via Workload Identity Federation.</p>
+      <div class="tag-row"><span class="tag">GitHub Actions</span><span class="tag">Robot Framework</span><span class="tag">GKE</span><span class="tag">ArgoCD</span><span class="tag">Kustomize</span></div>
+    </div>
+
+    <div class="project-card reveal reveal-delay-2" data-cat="cicd">
+      <span class="project-pill pill-orange">CI/CD · Observability</span>
+      <h3>Smart Failure Classification &amp; Reporting</h3>
+      <p>Python XML-parser reads Robot Framework <code style="font-family:'SF Mono',Consolas,monospace;font-size:.8em;color:var(--accent)">output.xml</code> and separates <code style="font-family:'SF Mono',Consolas,monospace;font-size:.8em;color:var(--accent)">notBlock</code> failures from blocking ones. Finalise job aggregates multi-team results and posts a unified PR comment with per-team GCS log links; MS Teams Adaptive Cards notify on each run.</p>
+      <div class="tag-row"><span class="tag">Python</span><span class="tag">GitHub Script</span><span class="tag">GCS</span><span class="tag">MS Teams</span><span class="tag">Datadog Synthetics</span></div>
     </div>
 
     <div class="project-card reveal reveal-delay-2" data-cat="api">
@@ -577,6 +599,7 @@ footer{text-align:center;padding:3rem 1.5rem;font-size:.78rem;color:var(--subtle
 <span class="rf-k">Library</span>             <span class="rf-v">DatabaseLibrary</span>               <span class="rf-c"># PostgreSQL integrity checks</span>
 <span class="rf-k">Library</span>             <span class="rf-v">KpiDatadog</span>                    <span class="rf-c"># performance KPI monitoring</span>
 <span class="rf-k">Resource</span>            <span class="rf-v">GRC.AccountCheck.resource</span>     <span class="rf-c"># IKS compliance · SAP risk-role auditing</span>
+<span class="rf-k">Resource</span>            <span class="rf-v">ReleaseTrain.cicd.resource</span>    <span class="rf-c"># GKE release-train E2E quality gate</span>
 <span class="rf-k">Resource</span>            <span class="rf-v">Checkout.E2E.resource</span>         <span class="rf-c"># multi-country checkout flows</span>
 <span class="rf-k">Resource</span>            <span class="rf-v">Accessibility.WCAG.resource</span>   <span class="rf-c"># WCAG 2.1 · BITV 2.0 compliance</span>
 
@@ -585,8 +608,9 @@ footer{text-align:center;padding:3rem 1.5rem;font-size:.78rem;color:var(--subtle
 <span class="rf-vn">${DOMAIN}</span>           <span class="rf-v">E-Commerce · SAP GUI · SAP Fiori · GRC Compliance · Logistics</span>
 <span class="rf-vn">${LANGUAGES}</span>        <span class="rf-v">Python · JavaScript · TypeScript · Robot Framework · Groovy</span>
 <span class="rf-vn">${FRONTEND}</span>         <span class="rf-v">React · Redux · Flask · Node.js · HTML/CSS</span>
-<span class="rf-vn">${CI_CD}</span>             <span class="rf-v">Jenkins (28+ pipelines) · GitHub Actions · SonarQube</span>
-<span class="rf-vn">${INTEGRATIONS}</span>     <span class="rf-v">MS Teams · Jira/XRay · Datadog · KeePass · BigQuery</span>
+<span class="rf-vn">${CI_CD}</span>             <span class="rf-v">Jenkins (28+ pipelines) · GitHub Actions · ArgoCD · GKE · Workload Identity</span>
+<span class="rf-vn">${GITOPS}</span>           <span class="rf-v">Kubernetes · Kustomize · ArgoCD · GCS · Workload Identity Federation</span>
+<span class="rf-vn">${INTEGRATIONS}</span>     <span class="rf-v">MS Teams · Jira/XRay · Datadog Synthetics · KeePass · BigQuery · GCS</span>
 <span class="rf-vn">${SPOKEN}</span>           <span class="rf-v">English (C1) · Deutsch (B1) · Hindi (B2)</span></pre>
     </div>
   </div>
@@ -738,7 +762,7 @@ toggle.addEventListener('click', () => {
 });
 
 /* ── TYPING ANIMATION ── */
-const words = ['automation frameworks','test pipelines','CI/CD systems','E2E test suites','SAP compliance checks','mobile test harnesses'];
+const words = ['automation frameworks','test pipelines','CI/CD quality gates','E2E test suites','SAP compliance checks','mobile test harnesses','GKE release trains'];
 let wi = 0, ci = 0, deleting = false;
 const el = document.getElementById('typingWord');
 function type() {
